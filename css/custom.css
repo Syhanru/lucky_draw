@@ -1,0 +1,15 @@
+thead {
+	display: none;
+}
+
+input[type=text] {
+	width: 100%;
+}
+
+#input_table {
+	display: none;
+}
+
+.datatables {
+	display: none;
+}

@@ -1,0 +1,167 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500&subset=latin-ext,vietnamese';
+
+*, *:before, *:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+Body, div, img, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dd, dt, blockquote, fieldset, legend, label, input, textarea {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	list-style: none;
+	outline: none !important
+}
+
+strong {
+	font-weight: 500
+}
+
+img, object, embed {
+	border: 0 none;
+	height: auto;
+	max-width: 100%;
+	vertical-align: middle;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	font-style: normal;
+	font-size: 16px;
+	color: #333;
+	line-height: 1.6em;
+	background-color: #fff;
+}
+
+a {
+	color: #3372b2;
+	text-decoration: none
+}
+
+a:hover {
+	text-decoration: none;
+	color: #FFE710
+}
+
+a img:hover {
+	opacity: 0.8
+}
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0
+}
+
+.bt {
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 5px 10px;
+	line-height: 20px;
+	color: #fff;
+	font-weight: 500;
+	border-radius: 5px;
+	background-color: #478FF6;
+	box-shadow: 1px 2px 1px #2459D4
+}
+
+input[type="text"] {
+	background-color: transparent;
+	border: 1px solid #ccc;
+	padding: 5px 10px;
+	line-height: 20px;
+	border-radius: 5px
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table, th, td {
+	border: 1px solid #ccc;
+	padding: 5px 10px
+}
+
+.inner-page {
+	width: 1024px;
+	margin: 0 auto;
+	position: relative
+}
+
+.top-logo {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.title-event {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.main-cont {
+	margin-bottom: 30px;
+}
+
+.main-cont .col-left {
+	width: 60%;
+	padding-right: 20px;
+	float: left
+}
+
+.main-cont .col-right {
+	width: 40%;
+	float: left
+}
+
+.block {
+	margin-bottom: 15px;
+}
+
+.bx-list-spin {
+	border: 1px solid #ccc;
+	height: 200px;
+	padding: 10px;
+	border-radius: 7px;
+	margin-top: 5px
+}
+
+.col-right .bxlist {
+	padding: 10px;
+	border-radius: 7px;
+	background-color: #478FF6;
+	margin-bottom: 20px;
+	margin-top: 30px
+}
+
+.col-right .bxlist .title {
+	color: #fff;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+	text-align: center
+}
+
+.col-right .bxlist .title h2 {
+	font-size: 20px
+}
+
+.col-right .bxlist .cont-list {
+	height: 400px;
+	background-color: #fff;
+	border-radius: 7px;
+	padding: 15px
+}
+
+.footer {
+	padding: 20px;
+	text-align: center
+}
+
+.footer p {
+	margin-bottom: 5px
+}

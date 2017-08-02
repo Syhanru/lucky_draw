@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>TopPay</title>
+	<link rel="shortcut icon" href="images/favicon.ico"/>
+
+	<!-- Bootstrap -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/jquery.remodal.css" rel="stylesheet">
+	<link href="css/nanoscroller.css" rel="stylesheet">
+	<link href="css/nice-select.css" rel="stylesheet">
+	<link href="css/accordion.min.css" rel="stylesheet">
+
+	<!-- css-->
+	<!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">-->
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<section class="main">
+	<div class="inner-page">
+		<div class="top-logo"><img src="images/logo-toppay.jpg" alt=""/></div>
+		<div class="title-event"><img src="images/title-event.jpg" alt=""/></div>
+		<div class="main-cont clearfix">
+			<div class="col-left">
+				<div class="block">
+					<p>Danh sách quay thưởng</p>
+					<div class="bx-list-spin mCustomScrollbar">
+						<input type="file" id="input_file" class="form-control">
+						<table class="datatables input" id="input_table" width="100%"></table>
+					</div>
+				</div>
+				<div class="block">
+					<div class="accordion accor">
+						<h1>Giải ba</h1>
+						<div>
+							<div>Số Lượng:
+								<input type="text" class="sl" id="quantity_3">
+								<input type="button" value="Quay" class="bt btn_trigger" data-id="3">
+							</div>
+							<div>
+								<p>Kết quả <span>(lưu trữ)</span>:</p>
+								<p class="clearfix">
+									<input type="text" id="result_3" readonly>
+									<!--<select>-->
+										<!--<option data-display="Select" disabled>Nothing</option>-->
+										<!--<option value="1">Some option</option>-->
+										<!--<option value="2">Another option</option>-->
+										<!--<option value="4">Potato</option>-->
+									<!--</select>-->
+								</p>
+							</div>
+						</div>
+
+						<h1>Giải hai</h1>
+						<div>
+							<div>Số Lượng:
+								<input type="text" class="sl" id="quantity_2">
+								<input type="button" value="Quay" class="bt btn_trigger" data-id="2">
+							</div>
+							<div>
+								<p>Kết quả <span>(lưu trữ)</span>:</p>
+								<p class="clearfix">
+									<input type="text" id="result_2" readonly>
+								</p>
+							</div>
+						</div>
+
+						<h1>Giải nhất</h1>
+						<div>
+							<div>Số Lượng:
+								<input type="text" class="sl" id="quantity_1">
+								<input type="button" value="Quay" class="bt btn_trigger" data-id="1">
+							</div>
+							<div>
+								<p>Kết quả <span>(lưu trữ)</span>:</p>
+								<p class="clearfix">
+									<input type="text" id="result_1" readonly>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-right">
+				<div class="bxlist">
+					<div class="title">
+						<h2>Xin chức mừng</h2>
+						<p>Các khách hàng đã trúng giải <b id="result_title">ba</b></p>
+					</div>
+					<div class="cont-list mCustomScrollbar">
+						<table class="datatables output" id="output_table_3" width="100%"></table>
+						<table class="datatables output" id="output_table_2" width="100%"></table>
+						<table class="datatables output" id="output_table_1" width="100%"></table>
+					</div>
+				</div>
+				<div class="text-center"><a class="bt">Lưu kết quả</a></div>
+			</div>
+		</div>
+		<!--Footer Content-->
+		<div class="footer">
+			<p>&copy; <strong>Công ty Cổ phần Phát triển Thể thao Điện tử Việt Nam</strong> giữ mọi quyền hợp pháp của chương trình</p>
+			<p>Copyright © 2014 - 2017 Vietnam Esports.All rights reserved.</p>
+		</div>
+	</div>
+</section>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.nanoscroller.min.js"></script>
+<script src="js/jquery.nice-select.min.js"></script>
+<script src="js/accordion.min.js"></script>
+
+<!--CSV-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.3.5/papaparse.min.js"></script>-->
+
+<!--XLS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xls/0.7.6/xls.full.min.js"></script>
+
+<!--Datatables-->
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
+<script>
+	$(document).ready(function () {
+		var user_list = [];
+
+		$('select:not(.ignore)').niceSelect();
+		$('.accordion').accordion({
+			//whether the first section is expanded or not
+			firstChildExpand: true,
+			multiExpand: false,
+			slideSpeed: 500,
+			dropDownIcon: "&#9660"
+		});
+
+		$('.datatables').DataTable({
+			searching: false,
+			paging: false,
+			ordering: false,
+			info: false,
+			// data: user_list,
+			columns: [
+				{title: "KHÁCH HÀNG"},
+				{title: "SỐ ĐIỆN THOẠI"},
+				{title: "MÃ DỰ THƯỞNG"}
+			]
+		});
+		var input_table = $('#input_table');
+		var input_datatable = input_table.DataTable();
+
+		function shuffle(arr) {
+			for (var i = arr.length; i; i -= 1) {
+				var j = Math.floor(Math.random() * i);
+				var x = arr[i - 1];
+				arr[i - 1] = arr[j];
+				arr[j] = x;
+			}
+		}
+
+		$('.btn_trigger').on('click', function () {
+			//Shuffle user list before pick
+			shuffle(user_list);
+
+			var id = $(this).data('id');
+			var quantity = parseInt($('#quantity_' + id).val()) || 0;
+			var winner_list = [], winner_code_list = [];
+			for (var i = 0; i < quantity; i++) {
+				if (user_list.length > 0) {
+					var winner = user_list[0];
+					winner_list.push(winner);
+					winner_code_list.push(winner[2]);
+					for (var j = 0; j < user_list.length;) {
+						if (user_list[j][1] === winner_list[i][1])
+							user_list.splice(j, 1);
+						else
+							j++;
+					}
+				} else {
+					alert('Giải đã được trao hết !');
+					break;
+				}
+			}
+
+			// Display winner code
+			var winner_code_str = winner_code_list.join(", ");
+			$('#result_' + id).val(winner_code_str);
+
+			// Display winner info
+			var output_table = $('#output_table_' + id);
+			var output_datatables = output_table.DataTable();
+			$.each(winner_list, function(i, json_obj) {
+				output_datatables.row.add(json_obj).draw(false);
+			});
+			output_table.show();
+
+			// Disable button after click
+			$(this).css('-webkit-filter', 'grayscale(100%)');
+			$(this).prop('disabled', true);
+		});
+
+		$('.drawer').on('click', function () {
+			var id = $(this).find('.btn_trigger').data('id');
+			var title = "";
+			switch(id) {
+				case 1: title = "nhất"; break;
+				case 2: title = "nhì"; break;
+				case 3: default: title = "ba";
+			}
+			$('#result_title').text(title);
+			$('.output').hide();
+
+			var output_table = $('#output_table_' + id);
+			var totalRecords = output_table.DataTable().page.info().recordsTotal;
+			if (totalRecords)
+				output_table.show();
+		});
+
+		var input_file = $('#input_file');
+		$(function() {
+			oFileIn = document.getElementById('input_file');
+			if(oFileIn.addEventListener) {
+				// Clear all data before import new file
+				input_datatable.clear().draw();
+				user_list.length = 0;
+
+				oFileIn.addEventListener('change', filePicked, false);
+			}
+		});
+
+		function filePicked(oEvent) {
+			// Get The File From The Input
+			var oFile = oEvent.target.files[0];
+			var sFilename = oFile.name;
+			// Create A File Reader HTML5
+			var reader = new FileReader();
+
+			// Ready The Event For When A File Gets Selected
+			reader.onload = function(e) {
+				var data = e.target.result;
+				var cfb = XLS.CFB.read(data, {type: 'binary'});
+				var wb = XLS.parse_xlscfb(cfb);
+				// Loop Over Each Sheet
+				wb.SheetNames.forEach(function(sheetName) {
+					// Obtain The Current Row As CSV
+					var sCSV = XLS.utils.make_csv(wb.Sheets[sheetName]);
+					var oJS = XLS.utils.sheet_to_row_object_array(wb.Sheets[sheetName]);
+					// console.log(oJS);
+
+					$.each(oJS, function(i, json_obj) {
+						var user_name = json_obj['Name'] || "";
+						var user_mobile = json_obj['Mobile'] || "";
+						var user_code = json_obj['Lucky code'] || json_obj['Lucky Code'] || json_obj['Code'] || "";
+						if (user_code !== "") {
+							var new_data = [user_name, user_mobile, user_code];
+							user_list.push(new_data);
+							input_datatable.row.add(new_data).draw(false);
+						}
+					});
+					// console.log(user_list);
+
+					input_table.show();
+					input_file.hide();
+				});
+			};
+
+			// Tell JS To Start Reading The File.. You could delay this if desired
+			reader.readAsBinaryString(oFile);
+		}
+
+//		var input_file = $('#input_file');
+//		input_file.on('change', function () {
+//			input_datatable.clear().draw();
+//			user_list.length = 0;
+//            $(this).parse({
+//                config: {
+//                    complete: function(results, file) {
+//						// console.log(file);
+//						// console.log(results);
+//                        $.each(results.data, function(i, json_obj) {
+//                        	if (i > 0) {
+//								var user_name = String(json_obj[3]) || "";
+//								var user_mobile = String(json_obj[2]) || "";
+//								var user_code = String(json_obj[1]) || "";
+//								if (user_code !== "") {
+//									var new_data = [user_name, user_mobile, user_code];
+//									user_list.push(new_data);
+//									input_datatable.row.add(new_data).draw(false);
+//								}
+//							}
+//                        });
+//						// console.log(user_list);
+//						input_table.show();
+//						input_file.hide();
+//                    }
+//                },
+//                complete: function() {
+//                    // console.log("All files done!");
+//                }
+//            });
+//        });
+	});
+</script>
+</body>
+</html>
