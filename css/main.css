@@ -94,6 +94,15 @@ table, th, td {
 	position: relative
 }
 
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: #fff;
+	z-index: 99
+}
+
 .top-logo {
 	text-align: center;
 	margin-bottom: 10px;
@@ -106,6 +115,7 @@ table, th, td {
 
 .main-cont {
 	margin-bottom: 30px;
+	padding-top: 370px
 }
 
 .main-cont .col-left {

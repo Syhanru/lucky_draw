@@ -22,8 +22,10 @@
 <body>
 <section class="main">
 	<div class="inner-page">
-		<div class="top-logo"><img src="images/logo-toppay.jpg" alt=""/></div>
-		<div class="title-event"><img src="images/title-event.jpg" alt=""/></div>
+		<div class="header">
+			<div class="top-logo"><img src="images/logo-toppay.jpg" alt=""/></div>
+			<div class="title-event"><img src="images/title-event.jpg" alt=""/></div>
+		</div>
 		<div class="main-cont clearfix">
 			<div class="col-left">
 				<div class="block">
@@ -145,6 +147,16 @@
 			dropDownIcon: "&#9660"
 		});
 
+		var s = window.innerWidth >= 1600 ? 1 : window.innerWidth / 1600;
+		$("body").css({
+			zoom: s
+		});
+		$(window).on("resize", function () {
+			$("body").css({
+				zoom: s
+			});
+		});
+
 		$('.datatables').DataTable({
 			searching: false,
 			paging: false,
@@ -177,7 +189,7 @@
 			//Shuffle user list before pick
 			shuffle(user_list);
 
-			var id = parseInt($(this).data('id'));
+			var id = parseInt($(this).attr('data-id'));
 			var quantity = parseInt($('#quantity_' + id).val()) || 0;
 			var winner_list = [], winner_code_list = [];
 			for (var i = 0; i < quantity; i++) {
@@ -215,7 +227,7 @@
 		});
 
 		$('.drawer').on('click', function () {
-			var id = parseInt($(this).find('.btn_trigger').data('id'));
+			var id = parseInt($(this).find('.btn_trigger').attr('data-id'));
 			var title = "";
 			switch (id) {
 				case 1: title = "nhất"; break;
@@ -234,13 +246,13 @@
 		});
 
 		$('.btn_export').on('click', function () {
-			var id = parseInt($(this).data('id'));
+			var id = parseInt($(this).attr('data-id'));
 			var filename = "";
 			switch (id) {
 				case 1: filename = "1st_prize"; break;
 				case 2: filename = "2nd_prize"; break;
 				case 3: filename = "3rd_prize"; break;
-				default: filename = "prize";
+				default: filename = "unknown_prize";
 			}
 			$('#output_table_' + id).table2excel({
 				filename: filename //do not include extension
@@ -249,7 +261,7 @@
 
 		var input_file = $('#input_file');
 		$(function() {
-			oFileIn = document.getElementById('input_file');
+			var oFileIn = document.getElementById('input_file');
 			if(oFileIn.addEventListener) {
 				// Clear all data before import new file
 				input_datatable.clear().draw();
