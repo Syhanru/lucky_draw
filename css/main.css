@@ -1,5 +1,7 @@
 @import 'https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500&subset=latin-ext,vietnamese';
 
+/*---Main---*/
+
 *, *:before, *:after {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -175,3 +177,17 @@ table, th, td {
 .footer p {
 	margin-bottom: 5px
 }
+
+/*---End Main---*/
+
+/*---Custom---*/
+
+thead, .datatables, .hide_col, .dt-buttons {
+	display: none;
+}
+
+input[type=text] {
+	width: 100%;
+}
+
+/*---End Custom---*/
