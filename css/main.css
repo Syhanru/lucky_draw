@@ -117,7 +117,8 @@ table, th, td {
 
 .main-cont {
 	margin-bottom: 30px;
-	padding-top: 370px
+	/*padding-top: 370px;*/
+	padding-top: 400px;
 }
 
 .main-cont .col-left {
@@ -137,7 +138,8 @@ table, th, td {
 
 .bx-list-spin {
 	border: 1px solid #ccc;
-	height: 200px;
+	/*height: 200px;*/
+	height: 130px;
 	padding: 10px;
 	border-radius: 7px;
 	margin-top: 5px
@@ -148,7 +150,7 @@ table, th, td {
 	border-radius: 7px;
 	background-color: #478FF6;
 	margin-bottom: 20px;
-	margin-top: 30px
+	/*margin-top: 30px*/
 }
 
 .col-right .bxlist .title {
@@ -182,12 +184,42 @@ table, th, td {
 
 /*---Custom---*/
 
-thead, .datatables, .hide_col, .dt-buttons {
+.datatables, .hide_col, .dt-buttons {
 	display: none;
 }
 
 input[type=text] {
 	width: 100%;
+}
+
+input[type=text][id^=quantity_] {
+	text-align: center;
+}
+
+.apc-top-logo {
+	text-align: center;
+}
+
+.apc-top-logo > img {
+	width: 50%;
+}
+
+th {
+	width: 50% !important;
+	text-align: center;
+}
+
+.input, .output {
+	text-align: center;
+}
+
+.h2-congrat {
+	padding-top: 15px;
+	font-size: 25px !important;
+}
+
+.p-margin-10 {
+	margin-left: 10px;
 }
 
 /*---End Custom---*/

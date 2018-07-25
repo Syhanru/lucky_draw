@@ -7,7 +7,8 @@ $(document).ready(function () {
 		firstChildExpand: true,
 		multiExpand: false,
 		slideSpeed: 500,
-		dropDownIcon: "&#9660"
+		dropDownIcon: '<img src="images/apc/down-chevron.png" width="24"/>'
+		// dropDownIcon: "&#9660"
 	});
 
 	var s = window.innerWidth >= 1600 ? 1 : window.innerWidth / 1600;
@@ -20,67 +21,40 @@ $(document).ready(function () {
 		});
 	});
 
-	var input_table = $('#input_table');
-	input_table.DataTable({
+	var _config = {
 		searching: false,
 		paging: false,
 		ordering: false,
 		info: false,
 		columns: [
-			{title: "UID"},
-			{title: "KHÁCH HÀNG"},
-			{title: "SỐ ĐIỆN THOẠI"},
-			{title: "MÃ DỰ THƯỞNG"}
+			{title: "Mã hóa đơn"},
+			{title: "Serial"}
 		],
-		columnDefs: [{"targets": [0], "class": 'hide_col'}]
-	});
+		// columnDefs: [{"targets": [0], "class": 'hide_col'}]
+	};
+
+	var input_table = $('#input_table');
+	input_table.DataTable(_config);
 	var input_datatable = input_table.DataTable();
 
-	$('#output_table_3').DataTable({
-		searching: false,
-		paging: false,
-		ordering: false,
-		info: false,
-		columns: [
-			{title: "UID"},
-			{title: "KHÁCH HÀNG"},
-			{title: "SỐ ĐIỆN THOẠI"},
-			{title: "MÃ DỰ THƯỞNG"}
-		],
-		columnDefs: [{"targets": [0], "class": 'hide_col'}],
-		dom: 'Bfrtip',
-		buttons: [{extend: 'excelHtml5', title: 'TopPay_3rd_Prize'}]
-	});
-	$('#output_table_2').DataTable({
-		searching: false,
-		paging: false,
-		ordering: false,
-		info: false,
-		columns: [
-			{title: "UID"},
-			{title: "KHÁCH HÀNG"},
-			{title: "SỐ ĐIỆN THOẠI"},
-			{title: "MÃ DỰ THƯỞNG"}
-		],
-		columnDefs: [{"targets": [0], "class": 'hide_col'}],
-		dom: 'Bfrtip',
-		buttons: [{extend: 'excelHtml5', title: 'TopPay_2nd_Prize'}]
-	});
-	$('#output_table_1').DataTable({
-		searching: false,
-		paging: false,
-		ordering: false,
-		info: false,
-		columns: [
-			{title: "UID"},
-			{title: "KHÁCH HÀNG"},
-			{title: "SỐ ĐIỆN THOẠI"},
-			{title: "MÃ DỰ THƯỞNG"}
-		],
-		columnDefs: [{"targets": [0], "class": 'hide_col'}],
-		dom: 'Bfrtip',
-		buttons: [{extend: 'excelHtml5', title: 'TopPay_1st_Prize'}]
-	});
+	var tabl_config = $.extend(true, {}, _config);
+	tabl_config.dom = 'Bfrtip';
+
+	var tabl_4_config = $.extend(true, {}, tabl_config);
+	tabl_4_config.buttons = [{extend: 'excelHtml5', title: 'DailyAirPay_4th_Prize'}];
+	$('#output_table_4').DataTable(tabl_4_config);
+
+	var tabl_3_config = $.extend(true, {}, tabl_config);
+	tabl_3_config.buttons = [{extend: 'excelHtml5', title: 'DailyAirPay_3rd_Prize'}];
+	$('#output_table_3').DataTable(tabl_3_config);
+
+	var tabl_2_config = $.extend(true, {}, tabl_config);
+	tabl_2_config.buttons = [{extend: 'excelHtml5', title: 'DailyAirPay_2nd_Prize'}];
+	$('#output_table_2').DataTable(tabl_2_config);
+
+	var tabl_1_config = $.extend(true, {}, tabl_config);
+	tabl_1_config.buttons = [{extend: 'excelHtml5', title: 'DailyAirPay_1st_Prize'}];
+	$('#output_table_1').DataTable(tabl_1_config);
 
 	function shuffle(arr) {
 		for (var i = arr.length; i; i -= 1) {
@@ -102,7 +76,7 @@ $(document).ready(function () {
 			if (user_list.length > 0) {
 				var winner = user_list[0];
 				winner_list.push(winner);
-				winner_code_list.push(winner[3]);
+				winner_code_list.push(winner[1]);
 				for (var j = 0; j < user_list.length;) {
 					if (user_list[j][1] === winner_list[i][1])
 						user_list.splice(j, 1);
@@ -143,8 +117,11 @@ $(document).ready(function () {
 				title = "nhì";
 				break;
 			case 3:
-			default:
 				title = "ba";
+				break;
+			case 4:
+				title = "khuyến khích";
+				break;
 		}
 		$('#result_title').text(title);
 		$('.output').hide();
@@ -178,7 +155,7 @@ $(document).ready(function () {
 	function filePicked(oEvent) {
 		// Get The File From The Input
 		var oFile = oEvent.target.files[0];
-		var sFilename = oFile.name;
+		var sFilename = oFile.name;  // unused
 		// Create A File Reader HTML5
 		var reader = new FileReader();
 
@@ -190,17 +167,15 @@ $(document).ready(function () {
 			// Loop Over Each Sheet
 			wb.SheetNames.forEach(function (sheetName) {
 				// Obtain The Current Row As CSV
-				var sCSV = XLS.utils.make_csv(wb.Sheets[sheetName]);
+				var sCSV = XLS.utils.make_csv(wb.Sheets[sheetName]);  // unused
 				var oJS = XLS.utils.sheet_to_row_object_array(wb.Sheets[sheetName]);
 				// console.log(oJS);
 
 				$.each(oJS, function (i, json_obj) {
-					var user_id = json_obj['UID'] || "";
-					var user_name = json_obj['Name'] || "";
-					var user_mobile = json_obj['Mobile'] || "";
-					var user_code = json_obj['Lucky code'] || json_obj['Lucky Code'] || json_obj['Code'] || "";
-					if (user_code !== "") {
-						var new_data = [user_id, user_name, user_mobile, user_code];
+					var ma_hoa_don = json_obj['ma_hoa_don'] || "";
+					var serial = json_obj['serial'] || "";
+					if (ma_hoa_don !== "" || serial !== "") {
+						var new_data = [ma_hoa_don, serial];
 						user_list.push(new_data);
 						input_datatable.row.add(new_data).draw(false);
 					}
