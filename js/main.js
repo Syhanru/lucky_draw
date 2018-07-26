@@ -70,7 +70,17 @@ $(document).ready(function () {
 		shuffle(user_list);
 
 		var id = parseInt($(this).attr('data-id'));
-		var quantity = parseInt($('#quantity_' + id).val()) || 0;
+		var $quantity = $('#quantity_' + id);
+		var quantity = parseInt($quantity.val()) || 0;
+		if (quantity <= 0) {
+			alert('Vui lòng nhập số lượng quay thưởng hợp lệ !');
+			return false;
+		} else if (quantity > user_list.length) {
+			alert('Số lượng quay thưởng không được lớn hơn danh sách quay thưởng (Còn lại: ' + user_list.length + ' khách hàng) !');
+			return false;
+		}
+		$quantity.attr('readonly', '');
+
 		var winner_list = [], winner_code_list = [];
 		for (var i = 0; i < quantity; i++) {
 			if (user_list.length > 0) {
@@ -78,10 +88,11 @@ $(document).ready(function () {
 				winner_list.push(winner);
 				winner_code_list.push(winner[1]);
 				for (var j = 0; j < user_list.length;) {
-					if (user_list[j][1] === winner_list[i][1])
+					if (user_list[j][1] === winner_list[i][1]) {
 						user_list.splice(j, 1);
-					else
+					} else {
 						j++;
+					}
 				}
 			} else {
 				alert('Giải đã được trao hết !');
@@ -96,8 +107,11 @@ $(document).ready(function () {
 		// Display winner info
 		var output_table = $('#output_table_' + id);
 		var output_datatables = output_table.DataTable();
-		$.each(winner_list, function (i, json_obj) {
-			output_datatables.row.add(json_obj).draw(false);
+		$.each(winner_list, function (i, winner_info_list) {
+			for (i = 0; i < winner_info_list.length; i++) {
+				winner_info_list[i] += '<hr class="hr-table">';
+			}
+			output_datatables.row.add(winner_info_list).draw(false);
 		});
 		output_table.show();
 
@@ -130,8 +144,9 @@ $(document).ready(function () {
 
 		var output_table = $('#output_table_' + id);
 		var totalRecords = output_table.DataTable().page.info().recordsTotal;
-		if (totalRecords)
+		if (totalRecords) {
 			output_table.show();
+		}
 	});
 
 	$('.btn_export').on('click', function () {

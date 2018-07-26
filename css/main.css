@@ -13,7 +13,7 @@ Body, div, img, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dd, dt, blockquote, f
 	padding: 0;
 	border: 0;
 	list-style: none;
-	outline: none !important
+	outline: none !important;
 }
 
 strong {
@@ -39,16 +39,16 @@ body {
 
 a {
 	color: #3372b2;
-	text-decoration: none
+	text-decoration: none;
 }
 
 a:hover {
 	text-decoration: none;
-	color: #FFE710
+	color: #FFE710;
 }
 
 a img:hover {
-	opacity: 0.8
+	opacity: 0.8;
 }
 
 .clearfix:after {
@@ -57,7 +57,7 @@ a img:hover {
 	font-size: 0;
 	content: " ";
 	clear: both;
-	height: 0
+	height: 0;
 }
 
 .bt {
@@ -70,7 +70,7 @@ a img:hover {
 	font-weight: 500;
 	border-radius: 5px;
 	background-color: #478FF6;
-	box-shadow: 1px 2px 1px #2459D4
+	box-shadow: 1px 2px 1px #2459D4;
 }
 
 input[type="text"] {
@@ -78,7 +78,7 @@ input[type="text"] {
 	border: 1px solid #ccc;
 	padding: 5px 10px;
 	line-height: 20px;
-	border-radius: 5px
+	border-radius: 5px;
 }
 
 table {
@@ -87,13 +87,13 @@ table {
 
 table, th, td {
 	border: 1px solid #ccc;
-	padding: 5px 10px
+	padding: 5px 10px;
 }
 
 .inner-page {
 	width: 1024px;
 	margin: 0 auto;
-	position: relative
+	position: relative;
 }
 
 .header {
@@ -102,7 +102,7 @@ table, th, td {
 	left: 0;
 	right: 0;
 	background-color: #fff;
-	z-index: 99
+	z-index: 99;
 }
 
 .top-logo {
@@ -124,12 +124,12 @@ table, th, td {
 .main-cont .col-left {
 	width: 60%;
 	padding-right: 20px;
-	float: left
+	float: left;
 }
 
 .main-cont .col-right {
 	width: 40%;
-	float: left
+	float: left;
 }
 
 .block {
@@ -142,7 +142,11 @@ table, th, td {
 	height: 130px;
 	padding: 10px;
 	border-radius: 7px;
-	margin-top: 5px
+	margin-top: 5px;
+	resize: vertical;
+	overflow: auto;
+	min-height: 130px;
+	max-height: 400px;
 }
 
 .col-right .bxlist {
@@ -157,27 +161,27 @@ table, th, td {
 	color: #fff;
 	margin-bottom: 10px;
 	text-transform: uppercase;
-	text-align: center
+	text-align: center;
 }
 
 .col-right .bxlist .title h2 {
-	font-size: 20px
+	font-size: 20px;
 }
 
 .col-right .bxlist .cont-list {
 	height: 400px;
 	background-color: #fff;
 	border-radius: 7px;
-	padding: 15px
+	padding: 15px;
 }
 
 .footer {
 	padding: 20px;
-	text-align: center
+	text-align: center;
 }
 
 .footer p {
-	margin-bottom: 5px
+	margin-bottom: 5px;
 }
 
 /*---End Main---*/
@@ -209,6 +213,17 @@ th {
 	text-align: center;
 }
 
+table.output > tbody > tr {
+	height: 40px;
+	border: 0;
+}
+
+table.output,
+table.output > thead > tr > th,
+table.output > tbody > tr > td {
+	border: 0;
+}
+
 .input, .output {
 	text-align: center;
 }
@@ -220,6 +235,12 @@ th {
 
 .p-margin-10 {
 	margin-left: 10px;
+}
+
+.hr-table {
+	margin-bottom: 0;
+	border-top: 1px solid #ccc;
+	margin-top: -3px;
 }
 
 /*---End Custom---*/
