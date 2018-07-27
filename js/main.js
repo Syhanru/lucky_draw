@@ -100,20 +100,24 @@ $(document).ready(function () {
 			}
 		}
 
-		// Display winner code
-		var winner_code_str = winner_code_list.join(", ");
-		$('#result_' + id).val(winner_code_str);
+		append_loader(LOADER_SHOW);
+		window.setTimeout(function () {
+			// Display winner code
+			var winner_code_str = winner_code_list.join(", ");
+			$('#result_' + id).val(winner_code_str);
 
-		// Display winner info
-		var output_table = $('#output_table_' + id);
-		var output_datatables = output_table.DataTable();
-		$.each(winner_list, function (i, winner_info_list) {
-			for (i = 0; i < winner_info_list.length; i++) {
-				winner_info_list[i] += '<hr class="hr-table">';
-			}
-			output_datatables.row.add(winner_info_list).draw(false);
-		});
-		output_table.show();
+			// Display winner info
+			var output_table = $('#output_table_' + id);
+			var output_datatables = output_table.DataTable();
+			$.each(winner_list, function (i, winner_info_list) {
+				for (i = 0; i < winner_info_list.length; i++) {
+					winner_info_list[i] += '<hr class="hr-table">';
+				}
+				output_datatables.row.add(winner_info_list).draw(false);
+			});
+			output_table.show();
+			append_loader(LOADER_HIDE);
+		}, 3000);
 
 		// Disable button after click
 		$(this).css('-webkit-filter', 'grayscale(100%)');
@@ -204,5 +208,16 @@ $(document).ready(function () {
 
 		// Tell JS To Start Reading The File.. You could delay this if desired
 		reader.readAsBinaryString(oFile);
+	}
+
+	var LOADER_HIDE = 0, LOADER_SHOW = 1;
+	function append_loader(action){
+		if ($('#overlay').length)
+			$('#overlay').remove();
+		if (action === LOADER_SHOW) {
+			var overlay = $('<div id="overlay"><div id="loader"><img id="loading" src="images/airpay_logo.png"></div></div>');
+			overlay.show();
+			overlay.appendTo(document.body);
+		}
 	}
 });
