@@ -2,6 +2,7 @@ $(document).ready(function () {
 	var user_list = [];
 
 	$('select:not(.ignore)').niceSelect();
+
 	$('.accordion').accordion({
 		//whether the first section is expanded or not
 		firstChildExpand: true,
@@ -12,49 +13,48 @@ $(document).ready(function () {
 	});
 
 	var s = window.innerWidth >= 1600 ? 1 : window.innerWidth / 1600;
-	$("body").css({
+	$('body').css({
 		zoom: s
 	});
-	$(window).on("resize", function () {
-		$("body").css({
+	$(window).on('resize', function () {
+		$('body').css({
 			zoom: s
 		});
 	});
 
-	var _config = {
+	var base_configs = {
 		searching: false,
 		paging: false,
 		ordering: false,
 		info: false,
 		columns: [
-			{title: "Mã hóa đơn"},
-			{title: "Serial"}
+			{title: 'Mã hóa đơn'},
+			{title: 'Serial'}
 		],
-		// columnDefs: [{"targets": [0], "class": 'hide_col'}]
+		// columnDefs: [{'targets': [0], 'class': 'hide_col'}]
 	};
 
-	var input_table = $('#input_table');
-	input_table.DataTable(_config);
-	var input_datatable = input_table.DataTable();
+	var output_tbl_configs = $.extend(true, {}, base_configs);
+	output_tbl_configs.dom = 'Bfrtip';
 
-	var tabl_config = $.extend(true, {}, _config);
-	tabl_config.dom = 'Bfrtip';
+	var output_tbl_4_configs = $.extend(true, {}, output_tbl_configs);
+	output_tbl_4_configs.buttons = [{extend: 'excelHtml5', title: 'DailyAirPay_4th_Prize'}];
 
-	var tabl_4_config = $.extend(true, {}, tabl_config);
-	tabl_4_config.buttons = [{extend: 'excelHtml5', title: 'DailyAirPay_4th_Prize'}];
-	$('#output_table_4').DataTable(tabl_4_config);
+	var output_tbl_3_configs = $.extend(true, {}, output_tbl_configs);
+	output_tbl_3_configs.buttons = [{extend: 'excelHtml5', title: 'DailyAirPay_3rd_Prize'}];
 
-	var tabl_3_config = $.extend(true, {}, tabl_config);
-	tabl_3_config.buttons = [{extend: 'excelHtml5', title: 'DailyAirPay_3rd_Prize'}];
-	$('#output_table_3').DataTable(tabl_3_config);
+	var output_tbl_2_configs = $.extend(true, {}, output_tbl_configs);
+	output_tbl_2_configs.buttons = [{extend: 'excelHtml5', title: 'DailyAirPay_2nd_Prize'}];
 
-	var tabl_2_config = $.extend(true, {}, tabl_config);
-	tabl_2_config.buttons = [{extend: 'excelHtml5', title: 'DailyAirPay_2nd_Prize'}];
-	$('#output_table_2').DataTable(tabl_2_config);
+	var output_tbl_1_configs = $.extend(true, {}, output_tbl_configs);
+	output_tbl_1_configs.buttons = [{extend: 'excelHtml5', title: 'DailyAirPay_1st_Prize'}];
 
-	var tabl_1_config = $.extend(true, {}, tabl_config);
-	tabl_1_config.buttons = [{extend: 'excelHtml5', title: 'DailyAirPay_1st_Prize'}];
-	$('#output_table_1').DataTable(tabl_1_config);
+	var TABLE_CONFIGS = {
+		4: output_tbl_4_configs,
+		3: output_tbl_3_configs,
+		2: output_tbl_2_configs,
+		1: output_tbl_1_configs
+	};
 
 	function shuffle(arr) {
 		for (var i = arr.length; i; i -= 1) {
@@ -107,15 +107,18 @@ $(document).ready(function () {
 			$('#result_' + id).val(winner_code_str);
 
 			// Display winner info
-			var output_table = $('#output_table_' + id);
-			var output_datatables = output_table.DataTable();
+			var $output_table = $('#output_table_' + id);
 			$.each(winner_list, function (i, winner_info_list) {
 				for (i = 0; i < winner_info_list.length; i++) {
 					winner_info_list[i] += '<hr class="hr-table">';
 				}
-				output_datatables.row.add(winner_info_list).draw(false);
 			});
-			output_table.show();
+
+			var output_tbl_configs = TABLE_CONFIGS[id];
+			output_tbl_configs.data = winner_list;
+			$output_table.DataTable(output_tbl_configs);
+
+			$output_table.show();
 			append_loader(LOADER_HIDE);
 		}, 3000);
 
@@ -147,24 +150,20 @@ $(document).ready(function () {
 		$('.btn_export').attr('data-id', id);
 
 		var output_table = $('#output_table_' + id);
-		var totalRecords = output_table.DataTable().page.info().recordsTotal;
-		if (totalRecords) {
-			output_table.show();
-		}
+		output_table.show();
 	});
 
 	$('.btn_export').on('click', function () {
 		var id = parseInt($(this).attr('data-id'));
-		var output_table_wrapper = $('#output_table_' + id + '_wrapper');
-		output_table_wrapper.find('.buttons-excel').click();
+		var $output_table_wrapper = $('#output_table_' + id + '_wrapper');
+		$output_table_wrapper.find('.buttons-excel').click();
 	});
 
-	var input_file = $('#input_file');
 	$(function () {
 		var oFileIn = document.getElementById('input_file');
 		if (oFileIn.addEventListener) {
 			// Clear all data before import new file
-			input_datatable.clear().draw();
+			// input_datatable.clear().draw();
 			user_list.length = 0;
 
 			oFileIn.addEventListener('change', filePicked, false);
@@ -196,13 +195,23 @@ $(document).ready(function () {
 					if (ma_hoa_don !== "" || serial !== "") {
 						var new_data = [ma_hoa_don, serial];
 						user_list.push(new_data);
-						input_datatable.row.add(new_data).draw(false);
 					}
 				});
 				// console.log(user_list);
 
-				input_table.show();
-				input_file.hide();
+				var begin = Math.round(new Date().getTime() / 1000.0);
+
+				var input_tbl_configs = $.extend(true, {}, base_configs);
+				input_tbl_configs.data = user_list;
+
+				var $input_table = $('#input_table');
+				$input_table.DataTable(input_tbl_configs);
+				$input_table.show();
+
+				$('#input_file').hide();
+
+				var end = Math.round(new Date().getTime() / 1000.0);
+				console.log('import_total_time = ' + (end - begin));
 			});
 		};
 
@@ -211,7 +220,8 @@ $(document).ready(function () {
 	}
 
 	var LOADER_HIDE = 0, LOADER_SHOW = 1;
-	function append_loader(action){
+
+	function append_loader(action) {
 		if ($('#overlay').length)
 			$('#overlay').remove();
 		if (action === LOADER_SHOW) {
