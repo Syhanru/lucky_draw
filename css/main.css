@@ -243,6 +243,10 @@ table.output > tbody > tr > td {
 	margin-top: -3px;
 }
 
+#mCSB_1_dragger_vertical {
+	min-height: 20px !important;
+}
+
 /*---End Custom---*/
 
 /*---Loader---*/

@@ -1,3 +1,18 @@
+function getRandomInteger(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function shuffle(arr) {
+	for (var i = arr.length; i; i -= 1) {
+		var j = Math.floor(Math.random() * i);
+		var x = arr[i - 1];
+		arr[i - 1] = arr[j];
+		arr[j] = x;
+	}
+}
+
 $(document).ready(function () {
 	var user_list = [];
 
@@ -56,15 +71,6 @@ $(document).ready(function () {
 		1: output_tbl_1_configs
 	};
 
-	function shuffle(arr) {
-		for (var i = arr.length; i; i -= 1) {
-			var j = Math.floor(Math.random() * i);
-			var x = arr[i - 1];
-			arr[i - 1] = arr[j];
-			arr[j] = x;
-		}
-	}
-
 	$('.btn_trigger').on('click', function () {
 		//Shuffle user list before pick
 		shuffle(user_list);
@@ -120,7 +126,7 @@ $(document).ready(function () {
 
 			$output_table.show();
 			append_loader(LOADER_HIDE);
-		}, 3000);
+		}, getRandomInteger(3000, 6000));
 
 		// Disable button after click
 		$(this).css('-webkit-filter', 'grayscale(100%)');
@@ -199,10 +205,10 @@ $(document).ready(function () {
 				});
 				// console.log(user_list);
 
-				var begin = Math.round(new Date().getTime() / 1000.0);
+				// var begin = Math.round(new Date().getTime() / 1000.0);
 
 				var input_tbl_configs = $.extend(true, {}, base_configs);
-				input_tbl_configs.data = user_list;
+				input_tbl_configs.data = user_list.slice(0, 1000);
 
 				var $input_table = $('#input_table');
 				$input_table.DataTable(input_tbl_configs);
@@ -210,8 +216,8 @@ $(document).ready(function () {
 
 				$('#input_file').hide();
 
-				var end = Math.round(new Date().getTime() / 1000.0);
-				console.log('import_total_time = ' + (end - begin));
+				// var end = Math.round(new Date().getTime() / 1000.0);
+				// console.log('import_total_time = ' + (end - begin));
 			});
 		};
 

@@ -18,7 +18,7 @@
 	<!-- css-->
 	<!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">-->
 	<!--<link rel="stylesheet" href="css/main.css">-->
-	<link rel="stylesheet" href="css/main.min.css?v=1.0">
+	<link rel="stylesheet" href="css/main.min.css?v=1.1">
 </head>
 <body>
 <section class="main">
@@ -143,7 +143,7 @@
 <script src="js/jszip.js"></script>
 
 <!--<script src="js/main.js"></script>-->
-<script src="js/main.min.js?v=1.0"></script>
+<script src="js/main.min.js?v=1.1"></script>
 
 </body>
 </html>
