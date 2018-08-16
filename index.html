@@ -18,7 +18,7 @@
 	<!-- css-->
 	<!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">-->
 	<!--<link rel="stylesheet" href="css/main.css">-->
-	<link rel="stylesheet" href="css/main.min.css?v=1.1">
+	<link rel="stylesheet" href="css/main.min.css?v=1.2">
 </head>
 <body>
 <section class="main">
@@ -133,11 +133,8 @@
 <script src="js/jquery.nice-select.min.js"></script>
 <script src="js/accordion.min.js"></script>
 
-<!--XLS-->
-<!--<script src="js/js-xls/jszip.js"></script>-->
-<!--<script src="js/js-xls/xls.full.min.js"></script>-->
-
 <!--XLSX-->
+<!--<script src="js/js-xlsx/xls.full.min.js"></script>-->
 <script src="js/js-xlsx/jszip.js"></script>
 <script src="js/js-xlsx/xlsx.js"></script>
 
@@ -145,9 +142,10 @@
 <script src="js/datatables/jquery.dataTables.min.js"></script>
 <script src="js/datatables/dataTables.buttons.js"></script>
 <script src="js/datatables/buttons.html5.js"></script>
+<script src="js/datatables/jszip.js"></script>
 
 <!--<script src="js/main.js"></script>-->
-<script src="js/main.min.js?v=1.2"></script>
+<script src="js/main.min.js?v=1.3"></script>
 
 </body>
 </html>

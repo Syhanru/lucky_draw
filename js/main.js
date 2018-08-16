@@ -15,7 +15,7 @@ function shuffle(arr) {
 
 var LOADER_HIDE = 0, LOADER_SHOW = 1;
 
-function append_loader(action) {
+function appendLoader(action) {
 	if ($('#overlay').length)
 		$('#overlay').remove();
 	if (action === LOADER_SHOW) {
@@ -84,8 +84,7 @@ $(document).ready(function () {
 	};
 
 	$('.btn_trigger').on('click', function () {
-		//Shuffle user list before pick
-		shuffle(user_list);
+		shuffle(user_list);  // Shuffle user list before pick
 
 		var id = parseInt($(this).attr('data-id'));
 		var $quantity = $('#quantity_' + id);
@@ -102,23 +101,33 @@ $(document).ready(function () {
 		var winner_list = [], winner_code_list = [];
 		for (var i = 0; i < quantity; i++) {
 			if (user_list.length > 0) {
-				var winner = user_list[0];
+				var winner_index = getRandomInteger(0, user_list.length - 1);
+				// console.log(winner_index);
+
+				var winner = user_list[winner_index];
 				winner_list.push(winner);
 				winner_code_list.push(winner[1]);
-				for (var j = 0; j < user_list.length;) {
-					if (user_list[j][1] === winner_list[i][1]) {
-						user_list.splice(j, 1);
-					} else {
-						j++;
-					}
-				}
+
+				user_list.splice(winner_index, 1);
+				// console.log(user_list);
+
+				// // NOTE: Đoạn code comment bên dưới dùng cho APA ngày xưa, trường hợp khách hàng có nhiều ref,
+				// // nhưng mỗi khách hàng chỉ được nhận giải 1 lần, nên tìm và xóa hết các ref còn lại trước khi
+				// // quay thưởng cho giải tiếp theo. FIXME: Cần tối ưu nếu sử dụng lại.
+				// for (var j = 0; j < user_list.length;) {
+				// 	if (user_list[j][1] === winner_list[i][1]) {
+				// 		user_list.splice(j, 1);
+				// 	} else {
+				// 		j++;
+				// 	}
+				// }
 			} else {
 				alert('Giải đã được trao hết !');
 				break;
 			}
 		}
 
-		append_loader(LOADER_SHOW);
+		appendLoader(LOADER_SHOW);
 		window.setTimeout(function () {
 			// Display winner code
 			var winner_code_str = winner_code_list.join(", ");
@@ -137,7 +146,7 @@ $(document).ready(function () {
 			$output_table.DataTable(output_tbl_configs);
 
 			$output_table.show();
-			append_loader(LOADER_HIDE);
+			appendLoader(LOADER_HIDE);
 		}, getRandomInteger(3000, 6000));
 
 		// Disable button after click
@@ -184,11 +193,11 @@ $(document).ready(function () {
 			// input_datatable.clear().draw();
 			user_list.length = 0;
 
-			oFileIn.addEventListener('change', filePicked_v2, false);
+			oFileIn.addEventListener('change', filePickedV2, false);
 		}
 	});
 
-	function filePicked_v2(oEvent) {
+	function filePickedV2(oEvent) {
 		// Get The File From The Input
 		var oFile = oEvent.target.files[0];
 		// var sFilename = oFile.name;  // unused
