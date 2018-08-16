@@ -33,7 +33,7 @@
 				<div class="block">
 					<p class="p-margin-10">Danh sách quay thưởng</p>
 					<div class="bx-list-spin mCustomScrollbar" data-mcs-theme="inset-dark">
-						<input type="file" id="input_file" class="form-control" accept="application/vnd.ms-excel">
+						<input type="file" id="input_file" class="form-control" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
 						<table class="datatables input" id="input_table" width="98%"></table>
 					</div>
 				</div>
@@ -134,16 +134,20 @@
 <script src="js/accordion.min.js"></script>
 
 <!--XLS-->
-<script src="js/xls.full.min.js"></script>
+<!--<script src="js/js-xls/jszip.js"></script>-->
+<!--<script src="js/js-xls/xls.full.min.js"></script>-->
+
+<!--XLSX-->
+<script src="js/js-xlsx/jszip.js"></script>
+<script src="js/js-xlsx/xlsx.js"></script>
 
 <!--Datatables-->
-<script src="js/jquery.dataTables.min.js"></script>
-<script src="js/dataTables.buttons.js"></script>
-<script src="js/buttons.html5.js"></script>
-<script src="js/jszip.js"></script>
+<script src="js/datatables/jquery.dataTables.min.js"></script>
+<script src="js/datatables/dataTables.buttons.js"></script>
+<script src="js/datatables/buttons.html5.js"></script>
 
 <!--<script src="js/main.js"></script>-->
-<script src="js/main.min.js?v=1.1"></script>
+<script src="js/main.min.js?v=1.2"></script>
 
 </body>
 </html>

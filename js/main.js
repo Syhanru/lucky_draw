@@ -13,6 +13,18 @@ function shuffle(arr) {
 	}
 }
 
+var LOADER_HIDE = 0, LOADER_SHOW = 1;
+
+function append_loader(action) {
+	if ($('#overlay').length)
+		$('#overlay').remove();
+	if (action === LOADER_SHOW) {
+		var overlay = $('<div id="overlay"><div id="loader"><img id="loading" src="images/airpay_logo.png"></div></div>');
+		overlay.show();
+		overlay.appendTo(document.body);
+	}
+}
+
 $(document).ready(function () {
 	var user_list = [];
 
@@ -172,27 +184,28 @@ $(document).ready(function () {
 			// input_datatable.clear().draw();
 			user_list.length = 0;
 
-			oFileIn.addEventListener('change', filePicked, false);
+			oFileIn.addEventListener('change', filePicked_v2, false);
 		}
 	});
 
-	function filePicked(oEvent) {
+	function filePicked_v2(oEvent) {
 		// Get The File From The Input
 		var oFile = oEvent.target.files[0];
-		var sFilename = oFile.name;  // unused
+		// var sFilename = oFile.name;  // unused
+
 		// Create A File Reader HTML5
 		var reader = new FileReader();
 
 		// Ready The Event For When A File Gets Selected
 		reader.onload = function (e) {
 			var data = e.target.result;
-			var cfb = XLS.CFB.read(data, {type: 'binary'});
-			var wb = XLS.parse_xlscfb(cfb);
+			var cfb = XLSX.read(data, {type: 'binary'});
+			// console.log(cfb);
+
 			// Loop Over Each Sheet
-			wb.SheetNames.forEach(function (sheetName) {
+			cfb.SheetNames.forEach(function (sheetName) {
 				// Obtain The Current Row As CSV
-				var sCSV = XLS.utils.make_csv(wb.Sheets[sheetName]);  // unused
-				var oJS = XLS.utils.sheet_to_row_object_array(wb.Sheets[sheetName]);
+				var oJS = XLSX.utils.sheet_to_json(cfb.Sheets[sheetName]);
 				// console.log(oJS);
 
 				$.each(oJS, function (i, json_obj) {
@@ -225,15 +238,52 @@ $(document).ready(function () {
 		reader.readAsBinaryString(oFile);
 	}
 
-	var LOADER_HIDE = 0, LOADER_SHOW = 1;
-
-	function append_loader(action) {
-		if ($('#overlay').length)
-			$('#overlay').remove();
-		if (action === LOADER_SHOW) {
-			var overlay = $('<div id="overlay"><div id="loader"><img id="loading" src="images/airpay_logo.png"></div></div>');
-			overlay.show();
-			overlay.appendTo(document.body);
-		}
-	}
+	// function filePicked(oEvent) {
+	// 	// Get The File From The Input
+	// 	var oFile = oEvent.target.files[0];
+	// 	var sFilename = oFile.name;  // unused
+	// 	// Create A File Reader HTML5
+	// 	var reader = new FileReader();
+	//
+	// 	// Ready The Event For When A File Gets Selected
+	// 	reader.onload = function (e) {
+	// 		var data = e.target.result;
+	// 		var cfb = XLS.CFB.read(data, {type: 'binary'});
+	// 		var wb = XLS.parse_xlscfb(cfb);
+	// 		// Loop Over Each Sheet
+	// 		wb.SheetNames.forEach(function (sheetName) {
+	// 			// Obtain The Current Row As CSV
+	// 			var sCSV = XLS.utils.make_csv(wb.Sheets[sheetName]);  // unused
+	// 			var oJS = XLS.utils.sheet_to_row_object_array(wb.Sheets[sheetName]);
+	// 			// console.log(oJS);
+	//
+	// 			$.each(oJS, function (i, json_obj) {
+	// 				var ma_hoa_don = json_obj['ma_hoa_don'] || "";
+	// 				var serial = json_obj['serial'] || "";
+	// 				if (ma_hoa_don !== "" || serial !== "") {
+	// 					var new_data = [ma_hoa_don, serial];
+	// 					user_list.push(new_data);
+	// 				}
+	// 			});
+	// 			// console.log(user_list);
+	//
+	// 			// var begin = Math.round(new Date().getTime() / 1000.0);
+	//
+	// 			var input_tbl_configs = $.extend(true, {}, base_configs);
+	// 			input_tbl_configs.data = user_list.slice(0, 1000);
+	//
+	// 			var $input_table = $('#input_table');
+	// 			$input_table.DataTable(input_tbl_configs);
+	// 			$input_table.show();
+	//
+	// 			$('#input_file').hide();
+	//
+	// 			// var end = Math.round(new Date().getTime() / 1000.0);
+	// 			// console.log('import_total_time = ' + (end - begin));
+	// 		});
+	// 	};
+	//
+	// 	// Tell JS To Start Reading The File.. You could delay this if desired
+	// 	reader.readAsBinaryString(oFile);
+	// }
 });
