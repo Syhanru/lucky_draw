@@ -1,5 +1,7 @@
 @import 'https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500&subset=latin-ext,vietnamese';
 
+/*---Main---*/
+
 *, *:before, *:after {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -11,7 +13,7 @@ Body, div, img, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dd, dt, blockquote, f
 	padding: 0;
 	border: 0;
 	list-style: none;
-	outline: none !important
+	outline: none !important;
 }
 
 strong {
@@ -37,16 +39,16 @@ body {
 
 a {
 	color: #3372b2;
-	text-decoration: none
+	text-decoration: none;
 }
 
 a:hover {
 	text-decoration: none;
-	color: #FFE710
+	color: #FFE710;
 }
 
 a img:hover {
-	opacity: 0.8
+	opacity: 0.8;
 }
 
 .clearfix:after {
@@ -55,7 +57,7 @@ a img:hover {
 	font-size: 0;
 	content: " ";
 	clear: both;
-	height: 0
+	height: 0;
 }
 
 .bt {
@@ -68,7 +70,7 @@ a img:hover {
 	font-weight: 500;
 	border-radius: 5px;
 	background-color: #478FF6;
-	box-shadow: 1px 2px 1px #2459D4
+	box-shadow: 1px 2px 1px #2459D4;
 }
 
 input[type="text"] {
@@ -76,7 +78,7 @@ input[type="text"] {
 	border: 1px solid #ccc;
 	padding: 5px 10px;
 	line-height: 20px;
-	border-radius: 5px
+	border-radius: 5px;
 }
 
 table {
@@ -85,13 +87,22 @@ table {
 
 table, th, td {
 	border: 1px solid #ccc;
-	padding: 5px 10px
+	padding: 5px 10px;
 }
 
 .inner-page {
 	width: 1024px;
 	margin: 0 auto;
-	position: relative
+	position: relative;
+}
+
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: #fff;
+	z-index: 99;
 }
 
 .top-logo {
@@ -106,17 +117,19 @@ table, th, td {
 
 .main-cont {
 	margin-bottom: 30px;
+	/*padding-top: 370px;*/
+	padding-top: 398px;
 }
 
 .main-cont .col-left {
 	width: 60%;
 	padding-right: 20px;
-	float: left
+	float: left;
 }
 
 .main-cont .col-right {
 	width: 40%;
-	float: left
+	float: left;
 }
 
 .block {
@@ -125,10 +138,15 @@ table, th, td {
 
 .bx-list-spin {
 	border: 1px solid #ccc;
-	height: 200px;
+	/*height: 200px;*/
+	height: 130px;
 	padding: 10px;
 	border-radius: 7px;
-	margin-top: 5px
+	margin-top: 5px;
+	resize: vertical;
+	overflow: auto;
+	min-height: 130px;
+	max-height: 400px;
 }
 
 .col-right .bxlist {
@@ -136,32 +154,153 @@ table, th, td {
 	border-radius: 7px;
 	background-color: #478FF6;
 	margin-bottom: 20px;
-	margin-top: 30px
+	/*margin-top: 30px*/
 }
 
 .col-right .bxlist .title {
 	color: #fff;
 	margin-bottom: 10px;
 	text-transform: uppercase;
-	text-align: center
+	text-align: center;
 }
 
 .col-right .bxlist .title h2 {
-	font-size: 20px
+	font-size: 20px;
 }
 
 .col-right .bxlist .cont-list {
 	height: 400px;
 	background-color: #fff;
 	border-radius: 7px;
-	padding: 15px
+	padding: 15px;
 }
 
 .footer {
 	padding: 20px;
-	text-align: center
+	text-align: center;
 }
 
 .footer p {
-	margin-bottom: 5px
+	margin-bottom: 5px;
 }
+
+/*---End Main---*/
+
+/*---Custom---*/
+
+.datatables, .hide_col, .dt-buttons {
+	display: none;
+}
+
+input[type=text] {
+	width: 100%;
+}
+
+input[type=text][id^=quantity_] {
+	text-align: center;
+}
+
+.apc-top-logo {
+	text-align: center;
+}
+
+.apc-top-logo > img {
+	width: 50%;
+}
+
+th {
+	width: 50% !important;
+	text-align: center;
+}
+
+table.output > tbody > tr {
+	height: 40px;
+	border: 0;
+}
+
+table.output,
+table.output > thead > tr > th,
+table.output > tbody > tr > td {
+	border: 0;
+}
+
+.input, .output {
+	text-align: center;
+}
+
+.h2-congrat {
+	padding-top: 15px;
+	font-size: 25px !important;
+}
+
+.p-margin-10 {
+	margin-left: 10px;
+}
+
+.hr-table {
+	margin-bottom: 0;
+	border-top: 1px solid #ccc;
+	margin-top: -3px;
+}
+
+#mCSB_1_dragger_vertical {
+	min-height: 20px !important;
+}
+
+/*---End Custom---*/
+
+/*---Loader---*/
+
+#overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	filter: alpha(opacity=70);
+	-moz-opacity: 0.7;
+	-khtml-opacity: 0.7;
+	opacity: 0.7;
+	z-index: 100;
+	display: none;
+}
+
+#loader {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	z-index: 1;
+	margin: -75px 0 0 -75px;
+
+	/*border: 16px solid #f3f3f3;*/
+	/*border-radius: 50%;*/
+
+	/*border-top: 16px solid #3498db;*/
+	/*border-bottom: 16px solid #3498db;*/
+
+	width: 140px;
+	height: 140px;
+	-webkit-animation: spin 2s linear infinite;
+	animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/*---End Loader---*/
