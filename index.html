@@ -104,7 +104,7 @@
 			<div class="col-right">
 				<div class="bxlist">
 					<div class="title">
-						<h2 class="h2-congrat">Xin chức mừng</h2>
+						<h2 class="h2-congrat">Xin chúc mừng</h2>
 						<p>Các khách hàng <b>đã trúng giải</b> <b id="result_title">khuyến khích</b></p>
 					</div>
 					<div class="cont-list mCustomScrollbar">
