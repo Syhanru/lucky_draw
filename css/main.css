@@ -16,7 +16,7 @@ Body, div, img, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dd, dt, blockquote, f
 	outline: none !important;
 }
 
-strong {
+b, strong {
 	font-weight: 500
 }
 
@@ -116,9 +116,9 @@ table, th, td {
 }
 
 .main-cont {
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 	/*padding-top: 370px;*/
-	padding-top: 398px;
+	padding-top: 379px;
 }
 
 .main-cont .col-left {
@@ -176,7 +176,8 @@ table, th, td {
 }
 
 .footer {
-	padding: 20px;
+	/*padding: 20px;*/
+	padding: 10px;
 	text-align: center;
 }
 
@@ -198,14 +199,15 @@ input[type=text] {
 
 input[type=text][id^=quantity_] {
 	text-align: center;
+	margin-left: 20px;
 }
 
-.apc-top-logo {
+.top-banner {
 	text-align: center;
 }
 
-.apc-top-logo > img {
-	width: 50%;
+.top-banner > img {
+	width: 70%;
 }
 
 th {
@@ -229,7 +231,7 @@ table.output > tbody > tr > td {
 }
 
 .h2-congrat {
-	padding-top: 15px;
+	padding-top: 10px;
 	font-size: 25px !important;
 }
 
@@ -245,6 +247,15 @@ table.output > tbody > tr > td {
 
 #mCSB_1_dragger_vertical {
 	min-height: 20px !important;
+}
+
+.text-uppercase {
+	font-weight: 500 !important;
+}
+
+.span-i-small {
+	font-style: italic;
+	font-size: 80%;
 }
 
 /*---End Custom---*/

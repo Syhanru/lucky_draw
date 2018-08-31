@@ -19,7 +19,7 @@ function appendLoader(action) {
 	if ($('#overlay').length)
 		$('#overlay').remove();
 	if (action === LOADER_SHOW) {
-		var overlay = $('<div id="overlay"><div id="loader"><img id="loading" src="images/airpay_logo.png"></div></div>');
+		var overlay = $('<div id="overlay"><div id="loader"><img id="loading" src="images/logo-airpay.png"></div></div>');
 		overlay.show();
 		overlay.appendTo(document.body);
 	}
@@ -35,7 +35,7 @@ $(document).ready(function () {
 		firstChildExpand: true,
 		multiExpand: false,
 		slideSpeed: 500,
-		dropDownIcon: '<img src="images/apc/down-chevron.png" width="24"/>'
+		dropDownIcon: '<img src="images/down-chevron.png" width="24"/>'
 		// dropDownIcon: "&#9660"
 	});
 
@@ -98,6 +98,10 @@ $(document).ready(function () {
 		}
 		$quantity.attr('readonly', '');
 
+		// Disable button after click
+		$(this).css('-webkit-filter', 'grayscale(100%)');
+		$(this).prop('disabled', true);
+
 		var winner_list = [], winner_code_list = [];
 		for (var i = 0; i < quantity; i++) {
 			if (user_list.length > 0) {
@@ -148,10 +152,6 @@ $(document).ready(function () {
 			$output_table.show();
 			appendLoader(LOADER_HIDE);
 		}, getRandomInteger(3000, 6000));
-
-		// Disable button after click
-		$(this).css('-webkit-filter', 'grayscale(100%)');
-		$(this).prop('disabled', true);
 	});
 
 	$('.drawer').on('click', function () {
@@ -168,7 +168,7 @@ $(document).ready(function () {
 				title = "ba";
 				break;
 			case 4:
-				title = "khuyến khích";
+				title = "may mắn";
 				break;
 		}
 		$('#result_title').text(title);
