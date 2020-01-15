@@ -97,7 +97,7 @@ table, th, td {
 }
 
 .header {
-    position: fixed;
+    /*position: fixed;*/
     top: 0;
     left: 0;
     right: 0;
@@ -117,8 +117,9 @@ table, th, td {
 
 .main-cont {
     margin-bottom: 20px;
+    margin-top: 20px;
     /*padding-top: 370px;*/
-    padding-top: 395px;
+    /*padding-top: 395px;*/
 }
 
 .main-cont .col-left {
@@ -259,11 +260,11 @@ table.output > tbody > tr > td {
     font-size: 80%;
 }
 
-@media only screen and (max-width: 1366px) {
-    .main-cont {
-        padding-top: 285px;
-    }
-}
+/*@media only screen and (max-width: 1366px) {*/
+/*    .main-cont {*/
+/*        padding-top: 285px;*/
+/*    }*/
+/*}*/
 
 .scroll-down {
     padding-top: 0 !important;

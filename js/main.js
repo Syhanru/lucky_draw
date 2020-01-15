@@ -64,6 +64,9 @@ $(document).ready(function () {
     var output_tbl_configs = $.extend(true, {}, base_configs);
     output_tbl_configs.dom = 'Bfrtip';
 
+    var output_tbl_9_configs = $.extend(true, {}, output_tbl_configs);
+    output_tbl_9_configs.buttons = [{extend: 'excelHtml5', title: 'DailyAirPay_9th_Prize'}];
+
     var output_tbl_8_configs = $.extend(true, {}, output_tbl_configs);
     output_tbl_8_configs.buttons = [{extend: 'excelHtml5', title: 'DailyAirPay_8th_Prize'}];
 
@@ -89,14 +92,15 @@ $(document).ready(function () {
     output_tbl_1_configs.buttons = [{extend: 'excelHtml5', title: 'DailyAirPay_1st_Prize'}];
 
     var TABLE_CONFIGS = {
-        8: [output_tbl_8_configs, 'Giải may mắn - 10.000Đ'],
-        7: [output_tbl_7_configs, 'Giải may mắn - 50.000Đ'],
-        6: [output_tbl_6_configs, 'Giải may mắn - 100.000Đ'],
-        5: [output_tbl_5_configs, 'Giải Thịnh Vượng - Áo thun Garena'],
-        4: [output_tbl_4_configs, 'Giải Phát Tài - Nón bảo hiểm Garena'],
-        3: [output_tbl_3_configs, 'Giải Phú Quý - Vòng đeo tay Xiaomi'],
-        2: [output_tbl_2_configs, 'Giải Lộc Xuân - Túi xách Under Armour'],
-        1: [output_tbl_1_configs, 'Giải An Khang - Tai nghe Plantronics']
+        9: [output_tbl_9_configs, 'Giải may mắn - 10.000Đ'],
+        8: [output_tbl_8_configs, 'Giải may mắn - 20.000Đ'],
+        7: [output_tbl_7_configs, 'Giải may mắn - 40.000Đ'],
+        6: [output_tbl_6_configs, 'Giải may mắn - 60.000Đ'],
+        5: [output_tbl_5_configs, 'Giải may mắn - 100.000Đ'],
+        4: [output_tbl_4_configs, 'Giải Thịnh Vượng - Vé xem phim CGV'],
+        3: [output_tbl_3_configs, 'Giải An Khang - Quà tặng Garena'],
+        2: [output_tbl_2_configs, 'Giải Phú Quý - Bao tay & Khẩu trang'],
+        1: [output_tbl_1_configs, 'Giải Lộc Xuân - Áo thun AirPay']
     };
 
     $('.btn_trigger').on('click', function () {
@@ -167,10 +171,10 @@ $(document).ready(function () {
 
             $output_table.show();
             appendLoader(LOADER_HIDE);
-        }, getRandomInteger(3000, 6000));
+        }, getRandomInteger(1000, 3000));
     });
 
-    $('#result_title').text(TABLE_CONFIGS[8][1]);
+    $('#result_title').text(TABLE_CONFIGS[9][1]);
     $('.drawer').on('click', function () {
         var id = parseInt($(this).find('.btn_trigger').attr('data-id'));
         var title = TABLE_CONFIGS[id][1];
